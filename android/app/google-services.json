@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093300791595",
+    "project_id": "avian-bird-450222-k1",
+    "storage_bucket": "avian-bird-450222-k1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093300791595:android:a2f925712210879130bd6e",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0jO9AZDSdzl4Q0ifVWwwIYM9bSjgcMZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
