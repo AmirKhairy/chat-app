@@ -1,5 +1,6 @@
 import 'package:chat_app/core/utils/bloc_observer.dart';
 import 'package:chat_app/firebase_options.dart';
+import 'package:chat_app/presentation/blocs/chat_bloc/chat_cubit.dart';
 import 'package:chat_app/presentation/blocs/login_bloc/login_cubit.dart';
 import 'package:chat_app/presentation/views/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +15,7 @@ void main() async {
   );
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (context) => LoginCubit()),
+    BlocProvider(create: (context) => ChatCubit()..getUsers()),
   ], child: MyApp()));
 }
 

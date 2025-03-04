@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:chat_app/presentation/blocs/login_bloc/login_states.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,11 +22,14 @@ class LoginCubit extends Cubit<LoginStates> {
   }) async {
     emit(RegisterLoadingState());
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
-      );
+      )
+          .then((onValue) {
+        addUserToFireStore(email: emailAddress, password: password);
+      });
       emit(RegisterSuccessState(credential.user!));
     } on FirebaseAuthException catch (e) {
       emit(RegisterErrorState(e.code));
@@ -58,5 +62,22 @@ class LoginCubit extends Cubit<LoginStates> {
         log('Wrong password provided for that user.');
       }
     }
+  }
+
+  Future<void> addUserToFireStore(
+      {required String email, required String password}) async {
+    emit(AddUserToFireStoreLoadingState());
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    await users.add({
+      'email': email,
+      'password': password,
+      'id': FirebaseAuth.instance.currentUser!.uid
+    }).then((onValue) {
+      emit(AddUserToFireStoreSuccessState(onValue));
+      log('User Added');
+    }).catchError((onError) {
+      emit(AddUserToFireStoreErrorState(onError));
+      log(onError.toString());
+    });
   }
 }

@@ -16,6 +16,18 @@ class RegisterErrorState extends LoginStates {
   RegisterErrorState(this.errorMessage);
 }
 
+class AddUserToFireStoreLoadingState extends LoginStates {}
+
+class AddUserToFireStoreSuccessState extends LoginStates {
+  final userCredential;
+  AddUserToFireStoreSuccessState(this.userCredential);
+}
+
+class AddUserToFireStoreErrorState extends LoginStates {
+  final String errorMessage;
+  AddUserToFireStoreErrorState(this.errorMessage);
+}
+
 class LoginLoadingState extends LoginStates {}
 
 class LoginSuccessState extends LoginStates {

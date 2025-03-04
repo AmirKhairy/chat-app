@@ -1,7 +1,10 @@
 import 'package:chat_app/core/utils/components.dart';
+import 'package:chat_app/core/utils/constants.dart';
 import 'package:chat_app/presentation/blocs/login_bloc/login_cubit.dart';
 import 'package:chat_app/presentation/blocs/login_bloc/login_states.dart';
+import 'package:chat_app/presentation/views/chat_screen.dart';
 import 'package:chat_app/presentation/views/register_screen.dart';
+import 'package:chat_app/presentation/views/users_screen.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/image_widget.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/login_or_register_row.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/sub_title_widget.dart';
@@ -17,7 +20,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff2B475E),
+      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Form(
@@ -81,11 +84,12 @@ class LoginScreen extends StatelessWidget {
               BlocConsumer<LoginCubit, LoginStates>(
                 listener: (context, state) {
                   if (state is LoginSuccessState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Login Successfully!'),
-                        backgroundColor: Colors.green,
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UsersScreen(),
                       ),
+                      (route) => false,
                     );
                   }
                   if (state is LoginErrorState) {

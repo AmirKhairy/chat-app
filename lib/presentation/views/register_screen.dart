@@ -1,4 +1,5 @@
 import 'package:chat_app/core/utils/components.dart';
+import 'package:chat_app/core/utils/constants.dart';
 import 'package:chat_app/presentation/blocs/login_bloc/login_cubit.dart';
 import 'package:chat_app/presentation/blocs/login_bloc/login_states.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/image_widget.dart';
@@ -17,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff2B475E),
+      backgroundColor: kPrimaryColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Form(
