@@ -6,10 +6,7 @@ class ChangePasswordEyeState extends LoginStates {}
 
 class RegisterLoadingState extends LoginStates {}
 
-class RegisterSuccessState extends LoginStates {
-  final userCredential;
-  RegisterSuccessState(this.userCredential);
-}
+class RegisterSuccessState extends LoginStates {}
 
 class RegisterErrorState extends LoginStates {
   final String errorMessage;
@@ -18,10 +15,7 @@ class RegisterErrorState extends LoginStates {
 
 class AddUserToFireStoreLoadingState extends LoginStates {}
 
-class AddUserToFireStoreSuccessState extends LoginStates {
-  final userCredential;
-  AddUserToFireStoreSuccessState(this.userCredential);
-}
+class AddUserToFireStoreSuccessState extends LoginStates {}
 
 class AddUserToFireStoreErrorState extends LoginStates {
   final String errorMessage;

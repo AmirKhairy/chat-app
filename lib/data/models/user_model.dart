@@ -1,20 +1,20 @@
-class UsersModel {
+class UserModel {
+  String? name;
   String? password;
   String? email;
   String? id;
-  String? name;
 
-  UsersModel({
+  UserModel({
     this.password,
     this.email,
     this.id,
     this.name,
   });
 
-  UsersModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     password = json['password'] as String?;
     email = json['email'] as String?;
     id = json['id'] as String?;
-    name = json['name'] as String?;
+    id = json['name'] as String?;
   }
 }

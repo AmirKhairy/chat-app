@@ -70,7 +70,7 @@ class UsersScreen extends StatelessWidget {
           body: ListView.separated(
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) => UserItem(
-              model: cubit.users[index], // Use users list instead of userModel
+              model: cubit.users[index],
             ),
             separatorBuilder: (context, index) => Divider(
               endIndent: 20,
@@ -93,7 +93,6 @@ class UserItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        log(model.id.toString());
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -114,7 +113,7 @@ class UserItem extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              model.email ?? 'Unknown',
+              model.name ?? 'Unknown',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,

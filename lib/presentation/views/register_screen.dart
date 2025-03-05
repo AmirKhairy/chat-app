@@ -13,6 +13,7 @@ class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -34,6 +35,22 @@ class RegisterScreen extends StatelessWidget {
               SubTitleWidget(subTitle: 'Register'),
               SizedBox(
                 height: 20,
+              ),
+              defaultTextFormField(
+                controller: nameController,
+                type: TextInputType.name,
+                validator: (name) {
+                  if (name!.isEmpty) {
+                    return 'name must not be empty';
+                  }
+                  return null;
+                },
+                hintText: 'Name',
+                isPassword: false,
+                showSuffixIcon: false,
+              ),
+              SizedBox(
+                height: 10,
               ),
               defaultTextFormField(
                 controller: emailController,
@@ -100,6 +117,7 @@ class RegisterScreen extends StatelessWidget {
                       LoginCubit.get(context).register(
                         emailAddress: emailController.text,
                         password: passwordController.text,
+                        name: nameController.text,
                       );
                     }
                   },
