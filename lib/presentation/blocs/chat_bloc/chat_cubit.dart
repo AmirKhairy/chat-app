@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:chat_app/data/models/message_model.dart';
 import 'package:chat_app/data/models/users_model.dart';
 import 'package:chat_app/presentation/blocs/chat_bloc/chat_states.dart';
+import 'package:chat_app/presentation/views/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatCubit extends Cubit<ChatStates> {

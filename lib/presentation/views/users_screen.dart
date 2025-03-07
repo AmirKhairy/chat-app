@@ -1,15 +1,25 @@
-import 'dart:developer';
-
-import 'package:chat_app/core/utils/constants.dart';
-import 'package:chat_app/data/models/users_model.dart';
 import 'package:chat_app/presentation/blocs/chat_bloc/chat_cubit.dart';
 import 'package:chat_app/presentation/blocs/chat_bloc/chat_states.dart';
-import 'package:chat_app/presentation/views/chat_screen.dart';
+import 'package:chat_app/presentation/widgets/users_widgets/no_users_widget.dart';
+import 'package:chat_app/presentation/widgets/users_widgets/users_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UsersScreen extends StatelessWidget {
+class UsersScreen extends StatefulWidget {
   const UsersScreen({super.key});
+
+  @override
+  State<UsersScreen> createState() => _UsersScreenState();
+}
+
+class _UsersScreenState extends State<UsersScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ChatCubit.get(context).getUsers();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,109 +29,11 @@ class UsersScreen extends StatelessWidget {
         var cubit = ChatCubit.get(context);
 
         if (cubit.users.isEmpty) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: kPrimaryColor,
-              centerTitle: true,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/scholar.png',
-                    height: 50,
-                  ),
-                  Text(
-                    'Users',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            body: Center(
-              child: Text('No Users'),
-            ),
-          );
+          return NoUsersWidget();
         }
 
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: kPrimaryColor,
-            centerTitle: true,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/scholar.png',
-                  height: 50,
-                ),
-                Text(
-                  'Users',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          body: ListView.separated(
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) => UserItem(
-              model: cubit.users[index],
-            ),
-            separatorBuilder: (context, index) => Divider(
-              endIndent: 20,
-              indent: 20,
-            ),
-            itemCount: cubit.users.length,
-          ),
-        );
+        return UsersWidget(cubit: cubit);
       },
-    );
-  }
-}
-
-class UserItem extends StatelessWidget {
-  final UsersModel model;
-
-  const UserItem({super.key, required this.model});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChatScreen(
-              chatId: model.id!,
-            ),
-          ),
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: kPrimaryColor,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Center(
-            child: Text(
-              model.name ?? 'Unknown',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

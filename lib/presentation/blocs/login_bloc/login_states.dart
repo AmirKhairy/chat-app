@@ -33,3 +33,14 @@ class LoginErrorState extends LoginStates {
   final String errorMessage;
   LoginErrorState(this.errorMessage);
 }
+
+class GetUsersLoadingState extends LoginStates {}
+
+class GetUsersSuccessState extends LoginStates {
+  GetUsersSuccessState();
+}
+
+class GetUsersErrorState extends LoginStates {
+  final String errorMessage;
+  GetUsersErrorState(this.errorMessage);
+}

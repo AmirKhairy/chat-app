@@ -4,6 +4,7 @@ import 'package:chat_app/presentation/blocs/login_bloc/login_cubit.dart';
 import 'package:chat_app/presentation/blocs/login_bloc/login_states.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/image_widget.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/login_or_register_row.dart';
+import 'package:chat_app/presentation/widgets/login_widgets/register_bloc_concumer_button.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/sub_title_widget.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class RegisterScreen extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             children: [
               ImageWidget(),
-              TitleWidget(title: 'Scholar Chat'),
+              TitleWidget(title: 'ChitChat'),
               SizedBox(
                 height: 60,
               ),
@@ -92,49 +93,11 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              BlocConsumer<LoginCubit, LoginStates>(
-                listener: (context, state) {
-                  if (state is RegisterSuccessState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Registered Successfully!'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  }
-                  if (state is RegisterErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.errorMessage),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
-                },
-                builder: (context, state) => defaultButton(
-                  function: () {
-                    if (formKey.currentState!.validate()) {
-                      LoginCubit.get(context).register(
-                        emailAddress: emailController.text,
-                        password: passwordController.text,
-                        name: nameController.text,
-                      );
-                    }
-                  },
-                  child: state is RegisterLoadingState
-                      ? CircularProgressIndicator(
-                          color: Colors.black,
-                        )
-                      : Text(
-                          'Register',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                ),
-              ),
+              RegisterBlocConcumerButton(
+                  formKey: formKey,
+                  emailController: emailController,
+                  passwordController: passwordController,
+                  nameController: nameController),
               SizedBox(
                 height: 10,
               ),
