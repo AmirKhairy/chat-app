@@ -28,7 +28,9 @@ class RegisterScreen extends StatelessWidget {
           child: ListView(
             physics: BouncingScrollPhysics(),
             children: [
-              ImageWidget(),
+              ImageWidget(
+                height: 100,
+              ),
               TitleWidget(title: 'ChitChat'),
               SizedBox(
                 height: 60,

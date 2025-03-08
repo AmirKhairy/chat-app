@@ -48,14 +48,18 @@ class LoginBlocConcumerButton extends StatelessWidget {
             );
           }
         },
-        child: Text(
-          'Login',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        child: state is LoginLoadingState
+            ? CircularProgressIndicator(
+                color: Colors.black,
+              )
+            : Text(
+                'Login',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
       ),
     );
   }

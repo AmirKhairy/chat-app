@@ -3,6 +3,7 @@ import 'package:chat_app/presentation/blocs/chat_bloc/chat_cubit.dart';
 import 'package:chat_app/presentation/blocs/chat_bloc/chat_states.dart';
 import 'package:chat_app/presentation/widgets/chat_widgets/message_widget.dart';
 import 'package:chat_app/presentation/widgets/chat_widgets/send_message_text_field_widget.dart';
+import 'package:chat_app/presentation/widgets/login_widgets/image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,10 +29,7 @@ class ChatScreen extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/images/chat_logo.png',
-                      height: 50,
-                    ),
+                    ImageWidget(height: 50),
                     Text(
                       'Chat',
                       style: TextStyle(

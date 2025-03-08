@@ -1,6 +1,7 @@
 import 'package:chat_app/core/utils/constants.dart';
 import 'package:chat_app/presentation/blocs/chat_bloc/chat_cubit.dart';
 import 'package:chat_app/presentation/views/login_screen.dart';
+import 'package:chat_app/presentation/widgets/login_widgets/image_widget.dart';
 import 'package:chat_app/presentation/widgets/users_widgets/user_item_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -36,8 +37,7 @@ class UsersWidget extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/scholar.png',
+            ImageWidget(
               height: 50,
             ),
             Text(

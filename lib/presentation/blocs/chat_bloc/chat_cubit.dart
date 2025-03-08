@@ -17,22 +17,41 @@ class ChatCubit extends Cubit<ChatStates> {
   List<UsersModel> users = [];
 
   UsersModel? userModel;
+
   Future<void> getUsers() async {
     emit(GetUsersLoadingState());
     users.clear();
-    await FirebaseFirestore.instance.collection('users').get().then((onValue) {
-      onValue.docs.forEach((element) {
-        if (element.data()['id'] != FirebaseAuth.instance.currentUser!.uid) {
-          userModel = UsersModel.fromJson(element.data());
-          users.add(userModel!);
-        }
-        emit(GetUsersSuccessState());
-      });
-    }).catchError((onError) {
-      log(onError.toString());
-      emit(GetUsersErrorState(onError));
+    FirebaseFirestore.instance.collection('users').snapshots().listen(
+      (onData) {
+        users.clear();
+        onData.docs.forEach((element) {
+          if (element.data()['id'] != FirebaseAuth.instance.currentUser!.uid) {
+            userModel = UsersModel.fromJson(element.data());
+            users.add(userModel!);
+          }
+          emit(GetUsersSuccessState());
+        });
+      },
+    ).onError((error, stackTrace) {
+      emit(GetUsersErrorState(error));
     });
   }
+  // Future<void> getUsers() async {
+  //   emit(GetUsersLoadingState());
+  //   users.clear();
+  //   await FirebaseFirestore.instance.collection('users').get().then((onValue) {
+  //     onValue.docs.forEach((element) {
+  //       if (element.data()['id'] != FirebaseAuth.instance.currentUser!.uid) {
+  //         userModel = UsersModel.fromJson(element.data());
+  //         users.add(userModel!);
+  //       }
+  //       emit(GetUsersSuccessState());
+  //     });
+  //   }).catchError((onError) {
+  //     log(onError.toString());
+  //     emit(GetUsersErrorState(onError));
+  //   });
+  // }
 
   Future<void> sendMessage({
     required String receiverId,

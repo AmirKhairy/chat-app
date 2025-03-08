@@ -1,3 +1,4 @@
+import 'package:chat_app/core/services/shared_prefs/cache_helper.dart';
 import 'package:chat_app/core/utils/constants.dart';
 import 'package:chat_app/presentation/views/login_screen.dart';
 import 'package:chat_app/presentation/widgets/login_widgets/image_widget.dart';
@@ -47,7 +48,9 @@ class _OnBoardingState extends State<OnBoarding> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ImageWidget(),
+            ImageWidget(
+              height: 100,
+            ),
             Align(
               alignment: Alignment.center,
               child: Text(
@@ -77,12 +80,13 @@ class _OnBoardingState extends State<OnBoarding> {
                     ),
                   ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 if (currentIndex < messages.length) {
                   setState(() {
                     currentIndex++;
                   });
                 } else {
+                  await CacheHelper.setBool(key: 'seenOnboarding', value: true);
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()),
