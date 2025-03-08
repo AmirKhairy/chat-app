@@ -56,3 +56,20 @@ Widget defaultButton({
         ),
       ),
     );
+
+void showNoInternetDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: Text("No Internet Connection"),
+        content: Text("Please check your internet connection."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }

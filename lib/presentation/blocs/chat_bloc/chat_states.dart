@@ -22,6 +22,13 @@ class RecieveMessageSuccessState extends ChatStates {}
 class RecieveMessageErrorState extends ChatStates {}
 
 class GetMessagesSuccessState extends ChatStates {}
+
 class SignOutLoadingState extends ChatStates {}
+
 class SignOutSuccessState extends ChatStates {}
+
 class SignOutErrorState extends ChatStates {}
+
+class NoInternetState extends ChatStates {}
+
+class InternetConnectedState extends ChatStates {}

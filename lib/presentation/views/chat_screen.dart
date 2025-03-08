@@ -1,3 +1,4 @@
+import 'package:chat_app/core/utils/components.dart';
 import 'package:chat_app/core/utils/constants.dart';
 import 'package:chat_app/presentation/blocs/chat_bloc/chat_cubit.dart';
 import 'package:chat_app/presentation/blocs/chat_bloc/chat_states.dart';
@@ -20,7 +21,11 @@ class ChatScreen extends StatelessWidget {
         ChatCubit.get(context).getMesseges(receiverId: chatId);
 
         return BlocConsumer<ChatCubit, ChatStates>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is NoInternetState) {
+              showNoInternetDialog(context);
+            }
+          },
           builder: (context, state) {
             return Scaffold(
               appBar: AppBar(
